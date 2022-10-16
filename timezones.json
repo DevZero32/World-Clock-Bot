@@ -453,7 +453,7 @@
   },
   {
     "value": "Bahia Standard Time",
-    "abbr": "BST",
+    "abbr": "BAST",
     "offset": -3,
     "isdst": false,
     "text": "(UTC-03:00) Salvador",
@@ -1083,7 +1083,7 @@
   },
   {
     "value": "Bangladesh Standard Time",
-    "abbr": "BST",
+    "abbr": "BNST",
     "offset": 6,
     "isdst": false,
     "text": "(UTC+06:00) Dhaka",
