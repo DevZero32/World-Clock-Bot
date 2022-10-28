@@ -103,7 +103,7 @@
   },
   {
     "value": "Mountain Standard Time (Mexico)",
-    "abbr": "MDT",
+    "abbr": "MUDT",
     "offset": -6,
     "isdst": true,
     "text": "(UTC-07:00) Chihuahua, La Paz, Mazatlan",
@@ -114,7 +114,7 @@
   },
   {
     "value": "Mountain Standard Time",
-    "abbr": "MDT",
+    "abbr": "MUDT",
     "offset": -6,
     "isdst": true,
     "text": "(UTC-07:00) Mountain Time (US & Canada)",
@@ -505,7 +505,7 @@
   },
   {
     "value": "Morocco Standard Time",
-    "abbr": "MDT",
+    "abbr": "MODT",
     "offset": 1,
     "isdst": true,
     "text": "(UTC) Casablanca",

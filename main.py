@@ -22,6 +22,7 @@ def findTz(tz):
   return "Not found"
 
 async def epoch(Rtime,day,month,year,offset,ctx):
+  day = int(day)
   hours = int(Rtime[0:2])
   mins = int(Rtime[3:])
 
@@ -31,49 +32,62 @@ async def epoch(Rtime,day,month,year,offset,ctx):
   if not year.isnumeric() or not month.isnumeric():
     await ctx.send(f"How to use: `/date [timezone] [year] [month] [day] ")
     return
+  month = int(month)
   year = int(year)
   if year >= 2038:
     await ctx.send(f"Maxium year reached.")
     return
-  month = int(month)
-  day = int(day)
-  if offset < 0:
-    hours = hours + offset
-  else:
-    hours = hours - offset
-  mins = int(mins)
 
+  
   date_time = datetime.datetime(year,month,day,hours,mins,0,0)
   epochtime = round(time.mktime(date_time.timetuple()))
+
+  if offset > 0: epochtime = epochtime - (offset * 3600)
+  else:epochtime = epochtime + (offset * 3600)
   return epochtime
 
 @client.command()
 async def default(ctx,tz,Rtime,day,month,year):
   offset = findTz(tz)
+  if offset == "Not found":
+    await ctx.send(f"Timezone not found.")
+    return
   epochtime = await epoch(Rtime,day,month,year,offset,ctx)
   await ctx.send(f"`<t:{epochtime}>`")
   
 @client.command()
 async def shorttime(ctx,tz,Rtime,day,month,year):
   offset = findTz(tz)
+  if offset == "Not found":
+    await ctx.send(f"Timezone not found.")
+    return
   epochtime = await epoch(Rtime,day,month,year,offset,ctx)
   await ctx.send(f"`<t:{epochtime}:t>`")
 
 @client.command()
 async def longtime(ctx,tz,Rtime,day,month,year):
   offset = findTz(tz)
+  if offset == "Not found":
+    await ctx.send(f"Timezone not found.")
+    return
   epochtime = await epoch(Rtime,day,month,year,offset,ctx)
   await ctx.send(f"`<t:{epochtime}:F>`")
 
 @client.command()
 async def shortdate(ctx,tz,Rtime,day,month,year):
   offset = findTz(tz)
+  if offset == "Not found":
+    await ctx.send(f"Timezone not found.")
+    return
   epochtime = await epoch(Rtime,day,month,year,offset,ctx)
   await ctx.send(f"`<t:{epochtime}:d>`")
 
 @client.command()
 async def longdate(ctx,tz,Rtime,day,month,year):
   offset = findTz(tz)
+  if offset == "Not found":
+    await ctx.send(f"Timezone not found.")
+    return
   epochtime = await epoch(Rtime,day,month,year,offset,ctx)
   await ctx.send(f"`<t:{epochtime}:D>`")
 
@@ -90,7 +104,9 @@ async def commands(ctx):
   main = """
 **How to use**
 
-`/default {24 hour digital time} {day} {month} {year}`
+`/default {timezone} {24 hour digital time} {day} {month} {year}`
+
+e.g `/default BST 00:06 17 10 2022`
 
 **Commands**
 
